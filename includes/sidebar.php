@@ -172,7 +172,7 @@
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle col-white">
                             <i class="material-icons col-pink">assignment</i>
-                            <span class="col-white">Conseil Anciens</span>
+                            <span class="col-white">Gestion Paroisse</span>
                         </a>
                         <ul class="ml-menu">
                             <li   class="sub" class="sub" <?php if(!has_Droit($idUser, "Lister groupe") || (date('Y') != $annee)){echo 'hidden';}else{echo "";} ?> ><a  href="groupeAnciens.php" title="Voir les groupes des anciens" class="col-white">
@@ -196,12 +196,37 @@
                                     <span class="col-white">Liste d'anciens</span>
                                 </a>                          
                             </li>
+
                             <li  class="sub" <?php if(!has_Droit($idUser, "Lister fidele")){echo 'hidden';}else{echo "";} ?> ><a  href="listeConseilles.php" title="voir la liste des Conseillés" class="col-white">
                                     <span class="col-white">Liste des conseillers</span>
                                 </a>                          
                             </li>
                         </ul>
                     </li>
+
+                     <!-- menu rajouter  -->
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle col-white">
+                            <i class="material-icons col-orange">timelapse</i>
+                            <span class="col-white">Collectes ou Dons</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li  class="sub" <?php if(!has_Droit($idUser, "Enregistrer une participation")){echo 'hidden';}else{echo "";} ?> ><a  href="listedons.php" class="col-white">
+                                    <span class="col-white">Liste des dons</span>
+                                </a>                          
+                            </li>
+                            <li  class="sub" <?php if(!has_Droit($idUser, "Enregistrer une participation")){echo 'hidden';}else{echo "";} ?> ><a  href="listecollectes.php" class="col-white">
+                                    <span class="col-white">Liste des collectes</span>
+                                </a>                          
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- fin du menu rajouter -->
+
+
+
+
+
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle col-white">
                             <i class="material-icons col-cyan">grain</i>

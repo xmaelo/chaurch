@@ -35,6 +35,10 @@
                                 <li> <i class="material-icons text-primary">school</i><a href="#" class="col-blue"> Conseils des Anciens</a></li>
                                 <li> <i class="material-icons text-primary">group</i><a href="#" class="col-blue">Groupes</a></li>
 
+                                <li style="float: right;">
+                                    <a class="col-blue" href="#" data-toggle="modal" data-target="#modalgroupe" title="Nouveau groupe"><i class="material-icons">plus_one</i>Nouveau groupe</a>
+                                </li>
+
                             </ol>
                         </div>
                     </div>
@@ -45,7 +49,7 @@
                     <div class="header text-center h4">
                             
                          Liste de groupe de type "Ancien"
-                            
+                        <!-- <button type="button" data-toggle="modal" data-target="#mymodal" class="btn btn-primary">Nouveau</button> -->
                             
                     </div>
                     <div class="body">
@@ -101,45 +105,99 @@
                             </section>
                         </div>
                     </div>
+
+<div class="modal" id="modalgroupe">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h4>Ajouter un groupe</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+        <div class="modal-body">
+            <form action="ajoutergroupeancien.php" method="POST" id="fom">
+                <div class="form-group">
+                    <label for="nomgroupe">Nom</label>
+                    <input type="text" name="nomgroupe" class="form-control" placeholder="Entrez le nom du groupe">
+                </div>
+                <div class="form-group">
+                    <label for="typegroupe">Type</label>
+                    <select name="typegroupe" id="" class="form-control">
+                        <option value="">Selectionnez le type de groupe</option>
+                        <option value="anciens">Anciens</option>
+                        <option value="CHORALE">Chorales</option>
+                        <option value="MOUVEMENT">Mouvement</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="affiche btn btn-primary">Enregistrer</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+        
+    </div>
+</div>
                     
 
   <script>
 
     $('#chargement').hide();
   
-                        $('.btn-danger').on('click', function(e){
+    $('.btn-danger').on('click', function(e){
 
-                            e.preventDefault();
+        e.preventDefault();
 
-                            var $a = $(this);
-                            var url = $a.attr('href');
-                            if(window.confirm('Voulez-vous supprimer cette zone?')){
-                                $.ajax(url, {
+        var $a = $(this);
+        var url = $a.attr('href');
+        if(window.confirm('Voulez-vous supprimer cette zone?')){
+            $.ajax(url, {
 
-                                    success: function(){
-                                        $a.parents('tr').remove();
-                                    },
+                success: function(){
+                    $a.parents('tr').remove();
+                },
 
-                                    error: function(){
+                error: function(){
 
-                                        alert("Une erreur est survenue lors de la suppresion du malade");
-                                    }
-                                });
-                            }
-                        });
+                    alert("Une erreur est survenue lors de la suppresion du malade");
+                }
+            });
+        }
+    });
 
-                         $('.afficher').on('click', function(af){
+     $('.afficher').on('click', function(af){
 
-                            af.preventDefault();
-                            $('.loader').show();
-                           var $b = $(this);
-                            url = $b.attr('href');
-                           $('#main-content').load(url, function(){
-                                $('.loader').hide();
-                           });
-                        });
+        af.preventDefault();
+        $('.loader').show();
+       var $b = $(this);
+        url = $b.attr('href');
+       $('#main-content').load(url, function(){
+            $('.loader').hide();
+       });
+    });
 
-                        $(".tableau_dynamique").DataTable();
-	               $('.loader').hide();
+    $(".tableau_dynamique").DataTable();
+    $('.loader').hide();
 
-                    </script>
+    $('#fom').on('submit', function(e){
+        $('.envoi_en_cours').show();
+        e.preventDefault();
+        var $param = $(this);
+        var formdata = (window.FormData) ? new FormData($param[0]) : null;
+        var data = (formdata !== null) ? formdata : $param.serialize();
+        console.log(data);
+        $.ajax({
+            url: 'ajoutergroupeancien.php',
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: data,
+            success: function(response) {
+                console.log(response);
+               $('#modalgroupe').modal('hide');
+               $('#main-content').load("groupeAnciens.php");
+
+            }
+        });
+        });
+
+</script>

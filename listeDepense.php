@@ -106,7 +106,7 @@
                                         </tr>
                                     </thead>
                                      <tbody>
-                                        <?php
+                                        <?php 
                                             $n=0;
                                             $reside = "";
                                             $total = 0;                                        

@@ -303,13 +303,13 @@ if(isset($_SESSION['login'])){
                                         ?>
                                          </tr>
                                          <tr>
-                                             <td align="center"><a class="afficher" href="bilanGeneral.php">Collectes Domminicales</a></td>
+                                             <td align="center"><a class="afficher" href="listedons.php">Collectes Domminicales</a></td>
                                              <td align="center">------------</td>
                                              <td align="center"><?php echo $coltotale; ?></td>
                                              <td align="center">Collectes Domminicales</td>
                                          </tr> 
                                           <tr>
-                                             <td align="center"><a class="afficher" href="bilanGeneral.php">Collectes Spéciales</a></td>
+                                             <td align="center"><a class="afficher" href="listecollectes.php">Collectes Spéciales</a></td>
                                              <td align="center">------------</td>
                                              <td align="center"><?php echo $ttc; ?></td>
                                              <td align="center">Collectes Spéciales</td>
