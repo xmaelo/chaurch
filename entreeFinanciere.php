@@ -35,6 +35,25 @@ if(isset($_SESSION['login'])){
                                         ORDER BY id ASC");
         $depense->execute();
         $total = 0;
+
+        $collectes= $db->prepare("SELECT * FROM collectes");
+        $collectes->execute();
+
+        $coltotale= 0;
+        while($col=$collectes->fetch(PDO::FETCH_OBJ)){
+                                            
+        $coltotale = $coltotale + $col->montant;
+        }
+        $donss= $db->prepare("SELECT * FROM dons");
+        $donss->execute();
+
+        $ttc= 0;
+        while($do=$donss->fetch(PDO::FETCH_OBJ)){
+                                            
+        $ttc = $coltotale + $do->montant;
+        }
+
+
         while($liste=$depense->fetch(PDO::FETCH_OBJ)){
                                             
         $total = $total + $liste->montant;
@@ -131,11 +150,16 @@ if(isset($_SESSION['login'])){
 <section class="wrapper">
    
     <div class="row">
-        <div class="col-lg-12 col-sm-12">
+        <div class="col-lg-12 col-sm-12"> 
             <ol class="breadcrumb">
                  <li class="col-blue"><i class="material-icons">home</i><a href="index.php" class="col-blue"> Accueil</a></li>
                 <li class="col-blue"><i class="material-icons">assistant</i><a href="sainteCene.php" class="afficher col-blue"> Sainte Cène</a></li>
                 <li class="col-blue"><i class="material-icons">assistant</i> Bilan Général</li>
+
+                <li style="float: right;"> 
+                    <a class="" href="#" title="Imprimer la lla liste des projets" target="_blank"><i class="material-icons">print</i> Imprimer</a>
+                    <a class="" href="#" title="Imprimer la lla liste des projets" target="_blank"><i class="material-icons">print</i> CSV</a>
+                </li>
             </ol>
         </div>
     </div>
@@ -277,6 +301,18 @@ if(isset($_SESSION['login'])){
                                             echo '<td align=center>'.array_sum($sous_grand_total).'</td>';
                                              echo '<td align=center>Sainte scène </td>';
                                         ?>
+                                         </tr>
+                                         <tr>
+                                             <td align="center"><a class="afficher" href="bilanGeneral.php">Collectes Domminicales</a></td>
+                                             <td align="center">------------</td>
+                                             <td align="center"><?php echo $coltotale; ?></td>
+                                             <td align="center">Collectes Domminicales</td>
+                                         </tr> 
+                                          <tr>
+                                             <td align="center"><a class="afficher" href="bilanGeneral.php">Collectes Spéciales</a></td>
+                                             <td align="center">------------</td>
+                                             <td align="center"><?php echo $ttc; ?></td>
+                                             <td align="center">Collectes Spéciales</td>
                                          </tr> 
 
 

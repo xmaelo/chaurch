@@ -28,6 +28,7 @@
                 $parametre = $x;
             }
             try{
+                /*
                 $transfert = $root->prepare("SELECT etat FROM base where annee = $annee_encours");
                 $transfert->execute();
                 $etat = 0;
@@ -36,7 +37,7 @@
 
                     $etat = $x->etat;
                 }
-
+            */
             }catch(Exception $ex){
                 echo $ex;        
             }
